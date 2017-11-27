@@ -10,6 +10,8 @@
 		523485AE1FCBF8BF00395F4D /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485AD1FCBF8BF00395F4D /* AppConfig.m */; };
 		523485B21FCBFD0200395F4D /* MBProgressHUD in Resources */ = {isa = PBXBuildFile; fileRef = 523485AF1FCBFD0200395F4D /* MBProgressHUD */; };
 		523485B41FCBFD0200395F4D /* SBJson in Resources */ = {isa = PBXBuildFile; fileRef = 523485B11FCBFD0200395F4D /* SBJson */; };
+		523485B91FCC37D900395F4D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485B81FCC37D900395F4D /* SearchViewController.m */; };
+		523485BF1FCC59F100395F4D /* MovieDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485BE1FCC59F100395F4D /* MovieDetailsViewController.m */; };
 		525369671FCBE4AA00EBD07F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525369661FCBE4AA00EBD07F /* AppDelegate.m */; };
 		5253696A1FCBE4AA00EBD07F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525369691FCBE4AA00EBD07F /* ViewController.m */; };
 		5253696D1FCBE4AA00EBD07F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5253696B1FCBE4AA00EBD07F /* Main.storyboard */; };
@@ -18,7 +20,7 @@
 		525369751FCBE4AA00EBD07F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 525369741FCBE4AA00EBD07F /* main.m */; };
 		5253697F1FCBE4AA00EBD07F /* themoviebrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253697E1FCBE4AA00EBD07F /* themoviebrowserTests.m */; };
 		5253698A1FCBE4AA00EBD07F /* themoviebrowserUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 525369891FCBE4AA00EBD07F /* themoviebrowserUITests.m */; };
-		B98691D450F73A63FCBFCFE6 /* Pods_themoviebrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDAD2792291CFE3C1823897 /* Pods_themoviebrowser.framework */; };
+		DE0B46F3C9C4F16BB619BE5D /* libPods-themoviebrowser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A2985C1F7E44D1D224DF28 /* libPods-themoviebrowser.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,10 @@
 		523485AF1FCBFD0200395F4D /* MBProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MBProgressHUD; sourceTree = "<group>"; };
 		523485B11FCBFD0200395F4D /* SBJson */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SBJson; sourceTree = "<group>"; };
 		523485B61FCC01BE00395F4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		523485B71FCC37D900395F4D /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		523485B81FCC37D900395F4D /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		523485BD1FCC59F100395F4D /* MovieDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailsViewController.h; sourceTree = "<group>"; };
+		523485BE1FCC59F100395F4D /* MovieDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDetailsViewController.m; sourceTree = "<group>"; };
 		525369621FCBE4AA00EBD07F /* themoviebrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = themoviebrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525369651FCBE4AA00EBD07F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		525369661FCBE4AA00EBD07F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -60,9 +66,9 @@
 		525369851FCBE4AA00EBD07F /* themoviebrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = themoviebrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		525369891FCBE4AA00EBD07F /* themoviebrowserUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = themoviebrowserUITests.m; sourceTree = "<group>"; };
 		5253698B1FCBE4AA00EBD07F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BDDAD2792291CFE3C1823897 /* Pods_themoviebrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_themoviebrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5EA73E1CD63F0639276D22F /* Pods-themoviebrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-themoviebrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser.release.xcconfig"; sourceTree = "<group>"; };
-		ECEAD5A13AE9C1057721FBA3 /* Pods-themoviebrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-themoviebrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser.debug.xcconfig"; sourceTree = "<group>"; };
+		A4A2985C1F7E44D1D224DF28 /* libPods-themoviebrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-themoviebrowser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE80DAD50B499DBD487C89DC /* Pods-themoviebrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-themoviebrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser.release.xcconfig"; sourceTree = "<group>"; };
+		DCD1AF0FAD169D211B6084C8 /* Pods-themoviebrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-themoviebrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B98691D450F73A63FCBFCFE6 /* Pods_themoviebrowser.framework in Frameworks */,
+				DE0B46F3C9C4F16BB619BE5D /* libPods-themoviebrowser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,11 +97,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02E636AF2B09B199CD798232 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DCD1AF0FAD169D211B6084C8 /* Pods-themoviebrowser.debug.xcconfig */,
+				AE80DAD50B499DBD487C89DC /* Pods-themoviebrowser.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		523485B51FCC01BE00395F4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				523485B61FCC01BE00395F4D /* Foundation.framework */,
-				BDDAD2792291CFE3C1823897 /* Pods_themoviebrowser.framework */,
+				A4A2985C1F7E44D1D224DF28 /* libPods-themoviebrowser.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -108,7 +123,7 @@
 				525369881FCBE4AA00EBD07F /* themoviebrowserUITests */,
 				525369631FCBE4AA00EBD07F /* Products */,
 				523485B51FCC01BE00395F4D /* Frameworks */,
-				C363FB55A45925D55E4FEC7E /* Pods */,
+				02E636AF2B09B199CD798232 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,19 +140,23 @@
 		525369641FCBE4AA00EBD07F /* themoviebrowser */ = {
 			isa = PBXGroup;
 			children = (
-				523485AF1FCBFD0200395F4D /* MBProgressHUD */,
-				523485B11FCBFD0200395F4D /* SBJson */,
-				525369651FCBE4AA00EBD07F /* AppDelegate.h */,
-				525369661FCBE4AA00EBD07F /* AppDelegate.m */,
-				525369681FCBE4AA00EBD07F /* ViewController.h */,
-				525369691FCBE4AA00EBD07F /* ViewController.m */,
-				5253696B1FCBE4AA00EBD07F /* Main.storyboard */,
-				5253696E1FCBE4AA00EBD07F /* Assets.xcassets */,
-				525369701FCBE4AA00EBD07F /* LaunchScreen.storyboard */,
-				525369731FCBE4AA00EBD07F /* Info.plist */,
-				525369741FCBE4AA00EBD07F /* main.m */,
 				523485AC1FCBF8BF00395F4D /* AppConfig.h */,
 				523485AD1FCBF8BF00395F4D /* AppConfig.m */,
+				525369651FCBE4AA00EBD07F /* AppDelegate.h */,
+				525369661FCBE4AA00EBD07F /* AppDelegate.m */,
+				5253696E1FCBE4AA00EBD07F /* Assets.xcassets */,
+				525369731FCBE4AA00EBD07F /* Info.plist */,
+				525369701FCBE4AA00EBD07F /* LaunchScreen.storyboard */,
+				525369741FCBE4AA00EBD07F /* main.m */,
+				5253696B1FCBE4AA00EBD07F /* Main.storyboard */,
+				523485AF1FCBFD0200395F4D /* MBProgressHUD */,
+				523485BD1FCC59F100395F4D /* MovieDetailsViewController.h */,
+				523485BE1FCC59F100395F4D /* MovieDetailsViewController.m */,
+				523485B11FCBFD0200395F4D /* SBJson */,
+				523485B71FCC37D900395F4D /* SearchViewController.h */,
+				523485B81FCC37D900395F4D /* SearchViewController.m */,
+				525369681FCBE4AA00EBD07F /* ViewController.h */,
+				525369691FCBE4AA00EBD07F /* ViewController.m */,
 			);
 			path = themoviebrowser;
 			sourceTree = "<group>";
@@ -160,15 +179,6 @@
 			path = themoviebrowserUITests;
 			sourceTree = "<group>";
 		};
-		C363FB55A45925D55E4FEC7E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				ECEAD5A13AE9C1057721FBA3 /* Pods-themoviebrowser.debug.xcconfig */,
-				C5EA73E1CD63F0639276D22F /* Pods-themoviebrowser.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -176,12 +186,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5253698E1FCBE4AA00EBD07F /* Build configuration list for PBXNativeTarget "themoviebrowser" */;
 			buildPhases = (
-				12EB1DE8047AD0BAF5056DD1 /* [CP] Check Pods Manifest.lock */,
+				4A61BC936A91CA2B08A916CA /* [CP] Check Pods Manifest.lock */,
 				5253695E1FCBE4AA00EBD07F /* Sources */,
 				5253695F1FCBE4AA00EBD07F /* Frameworks */,
 				525369601FCBE4AA00EBD07F /* Resources */,
-				52AF63FB44AC44C38EE75A6E /* [CP] Embed Pods Frameworks */,
-				145258AD7FA63E71A1EBBE1F /* [CP] Copy Pods Resources */,
+				A583B2466018A9446F110972 /* [CP] Embed Pods Frameworks */,
+				EBE1178B0CB864036064B071 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,7 +313,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12EB1DE8047AD0BAF5056DD1 /* [CP] Check Pods Manifest.lock */ = {
+		4A61BC936A91CA2B08A916CA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -321,7 +331,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		145258AD7FA63E71A1EBBE1F /* [CP] Copy Pods Resources */ = {
+		A583B2466018A9446F110972 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBE1178B0CB864036064B071 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -336,24 +361,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		52AF63FB44AC44C38EE75A6E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-themoviebrowser/Pods-themoviebrowser-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -363,7 +370,9 @@
 			files = (
 				5253696A1FCBE4AA00EBD07F /* ViewController.m in Sources */,
 				523485AE1FCBF8BF00395F4D /* AppConfig.m in Sources */,
+				523485B91FCC37D900395F4D /* SearchViewController.m in Sources */,
 				525369751FCBE4AA00EBD07F /* main.m in Sources */,
+				523485BF1FCC59F100395F4D /* MovieDetailsViewController.m in Sources */,
 				525369671FCBE4AA00EBD07F /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,7 +534,7 @@
 		};
 		5253698F1FCBE4AA00EBD07F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECEAD5A13AE9C1057721FBA3 /* Pods-themoviebrowser.debug.xcconfig */;
+			baseConfigurationReference = DCD1AF0FAD169D211B6084C8 /* Pods-themoviebrowser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -543,7 +552,7 @@
 		};
 		525369901FCBE4AA00EBD07F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5EA73E1CD63F0639276D22F /* Pods-themoviebrowser.release.xcconfig */;
+			baseConfigurationReference = AE80DAD50B499DBD487C89DC /* Pods-themoviebrowser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

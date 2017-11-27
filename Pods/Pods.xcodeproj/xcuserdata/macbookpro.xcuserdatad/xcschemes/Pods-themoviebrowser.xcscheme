@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0910"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "108377262A30FC8EB58E16A4E18C66D7"
-               BuildableName = "Pods_themoviebrowser.framework"
+               BlueprintIdentifier = "485100E882E1A2C61874283C2D755397"
+               BuildableName = "libPods-themoviebrowser.a"
                BlueprintName = "Pods-themoviebrowser"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
@@ -47,8 +47,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "108377262A30FC8EB58E16A4E18C66D7"
-            BuildableName = "Pods_themoviebrowser.framework"
+            BlueprintIdentifier = "485100E882E1A2C61874283C2D755397"
+            BuildableName = "libPods-themoviebrowser.a"
             BlueprintName = "Pods-themoviebrowser"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>

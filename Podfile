@@ -1,6 +1,6 @@
-platform :ios, '8.0'
-use_frameworks!
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
 
 target 'themoviebrowser' do
-  pod 'AFNetworking', '~> 3.1'
+  pod 'SDWebImage', '~> 4.2'
 end

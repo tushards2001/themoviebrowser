@@ -12,6 +12,12 @@
 
 
 @interface ViewController : UIViewController
+{
+    
+}
+
+
+- (IBAction)actionSearchTapped:(UIButton *)sender;
 
 
 @end
