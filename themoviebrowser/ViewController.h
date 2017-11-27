@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AppConfig.h"
+#import <Foundation/Foundation.h>
+
 
 @interface ViewController : UIViewController
 

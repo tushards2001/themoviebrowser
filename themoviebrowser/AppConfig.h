@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define DOMAIN_URL @"https://api.themoviedb.org/3"
 #define TMDB_API_KEY @"cd4831c9dda179e98c0c9b87fa54d511"
 
 @interface AppConfig : NSObject
