@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		523485AE1FCBF8BF00395F4D /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485AD1FCBF8BF00395F4D /* AppConfig.m */; };
+		523485B21FCBFD0200395F4D /* MBProgressHUD in Resources */ = {isa = PBXBuildFile; fileRef = 523485AF1FCBFD0200395F4D /* MBProgressHUD */; };
+		523485B31FCBFD0200395F4D /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 523485B01FCBFD0200395F4D /* AFNetworking */; };
+		523485B41FCBFD0200395F4D /* SBJson in Resources */ = {isa = PBXBuildFile; fileRef = 523485B11FCBFD0200395F4D /* SBJson */; };
 		525369671FCBE4AA00EBD07F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525369661FCBE4AA00EBD07F /* AppDelegate.m */; };
 		5253696A1FCBE4AA00EBD07F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525369691FCBE4AA00EBD07F /* ViewController.m */; };
 		5253696D1FCBE4AA00EBD07F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5253696B1FCBE4AA00EBD07F /* Main.storyboard */; };
@@ -35,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		523485AC1FCBF8BF00395F4D /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
+		523485AD1FCBF8BF00395F4D /* AppConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
+		523485AF1FCBFD0200395F4D /* MBProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MBProgressHUD; sourceTree = "<group>"; };
+		523485B01FCBFD0200395F4D /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AFNetworking; sourceTree = "<group>"; };
+		523485B11FCBFD0200395F4D /* SBJson */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SBJson; sourceTree = "<group>"; };
 		525369621FCBE4AA00EBD07F /* themoviebrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = themoviebrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525369651FCBE4AA00EBD07F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		525369661FCBE4AA00EBD07F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -101,6 +110,9 @@
 		525369641FCBE4AA00EBD07F /* themoviebrowser */ = {
 			isa = PBXGroup;
 			children = (
+				523485B01FCBFD0200395F4D /* AFNetworking */,
+				523485AF1FCBFD0200395F4D /* MBProgressHUD */,
+				523485B11FCBFD0200395F4D /* SBJson */,
 				525369651FCBE4AA00EBD07F /* AppDelegate.h */,
 				525369661FCBE4AA00EBD07F /* AppDelegate.m */,
 				525369681FCBE4AA00EBD07F /* ViewController.h */,
@@ -110,6 +122,8 @@
 				525369701FCBE4AA00EBD07F /* LaunchScreen.storyboard */,
 				525369731FCBE4AA00EBD07F /* Info.plist */,
 				525369741FCBE4AA00EBD07F /* main.m */,
+				523485AC1FCBF8BF00395F4D /* AppConfig.h */,
+				523485AD1FCBF8BF00395F4D /* AppConfig.m */,
 			);
 			path = themoviebrowser;
 			sourceTree = "<group>";
@@ -239,7 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				525369721FCBE4AA00EBD07F /* LaunchScreen.storyboard in Resources */,
+				523485B41FCBFD0200395F4D /* SBJson in Resources */,
 				5253696F1FCBE4AA00EBD07F /* Assets.xcassets in Resources */,
+				523485B21FCBFD0200395F4D /* MBProgressHUD in Resources */,
+				523485B31FCBFD0200395F4D /* AFNetworking in Resources */,
 				5253696D1FCBE4AA00EBD07F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5253696A1FCBE4AA00EBD07F /* ViewController.m in Sources */,
+				523485AE1FCBF8BF00395F4D /* AppConfig.m in Sources */,
 				525369751FCBE4AA00EBD07F /* main.m in Sources */,
 				525369671FCBE4AA00EBD07F /* AppDelegate.m in Sources */,
 			);
