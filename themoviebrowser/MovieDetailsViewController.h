@@ -10,8 +10,11 @@
 #import "AppConfig.h"
 #import <Foundation/Foundation.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "JTSImageViewController.h"
+#import "JTSImageInfo.h"
 
-@interface MovieDetailsViewController : UIViewController
+
+@interface MovieDetailsViewController : UIViewController <UIGestureRecognizerDelegate>
 {
     
 }

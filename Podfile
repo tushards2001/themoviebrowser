@@ -4,4 +4,5 @@ platform :ios, '9.0'
 target 'themoviebrowser' do
 pod 'SDWebImage', '~> 4.2'
 pod 'MBProgressHUD', '~> 1.1'
+pod 'JTSImageViewController', '~> 1.5'
 end

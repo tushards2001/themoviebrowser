@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"dictionaryMovie: %@", self.dictionaryMovie);
+    //NSLog(@"dictionaryMovie: %@", self.dictionaryMovie);
     
     //release date
     NSString *dateString = [self.dictionaryMovie objectForKey:@"release_date"];
@@ -48,8 +48,11 @@
         [self.lblReleaseDate setText:[NSString stringWithFormat:@"-NA-"]];
     }
     
+    
+    
+    
     // poster
-    NSURL *posterURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", POSTER_URL_154, [self.dictionaryMovie objectForKey:@"poster_path"]]];
+    NSURL *posterURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", POSTER_URL_342, [self.dictionaryMovie objectForKey:@"poster_path"]]];
     
     [self.imgPoster sd_setImageWithURL:posterURL
                       placeholderImage:[UIImage imageNamed:@"placeholder_poster"]
@@ -59,6 +62,15 @@
     
     self.imgPoster.layer.cornerRadius = 8.0f;
     self.imgPoster.layer.masksToBounds = YES;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImage:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    [self.imgPoster setUserInteractionEnabled:YES];
+    [self.imgPoster addGestureRecognizer:tapGesture];
+    
+    
+    
     
     //background
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
@@ -76,17 +88,28 @@
         self.imgBackground.backgroundColor = [UIColor blackColor];
     }
     
+    
+    
     // movie title
     [self.lblMovieTitle setText:[self.dictionaryMovie objectForKey:@"original_title"]];
+    
+    
+    
     
     // language
     NSLocale *locale = [NSLocale localeWithLocaleIdentifier:@"en"];
     [self.lblLanguage setText:[locale displayNameForKey:NSLocaleIdentifier value:[self.dictionaryMovie objectForKey:@"original_language"]]];
     
+    
+    
+    
     // avg vote
     self.viewAvgVoteContainer.layer.cornerRadius = 3.0f;
     self.viewAvgVoteContainer.layer.masksToBounds = YES;
-    [self.lblAvgVote setText:[NSString stringWithFormat:@"%@", [self.dictionaryMovie objectForKey:@"vote_average"]]];
+    [self.lblAvgVote setText:[NSString stringWithFormat:@"%.1f", [[self.dictionaryMovie objectForKey:@"vote_average"] floatValue]]];
+    
+    
+    
     
     // vote count
     int voteCount = [[self.dictionaryMovie objectForKey:@"vote_count"] intValue];
@@ -100,9 +123,11 @@
     }
     
     
+    
     // runtime
     //[self.lblRuntime setText:[NSString stringWithFormat:@"%@ Minutes", [self.dictionaryMovie objectForKey:@"runtime"]]];
     [self.lblRuntime setText:[NSString stringWithFormat:@"-NA-"]];
+    
     
     
     
@@ -119,7 +144,7 @@
     
     
     //CGSize size = CGSizeMake(self.container.frame.size.width, self.container.frame.size.height * 2);
-    [scrollViewContainer setContentSize:self.container.frame.size];
+    //[scrollViewContainer setContentSize:self.container.frame.size];
     
     //self.container.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -127,6 +152,25 @@
     [self getMovieDetails:(NSString *)[self.dictionaryMovie objectForKey:@"id"]];
 }
 
+
+- (void)showImage:(id)sender
+{
+    // Create image info
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.image = self.imgPoster.image;
+    imageInfo.referenceRect = self.imgPoster.frame;
+    imageInfo.referenceView = self.imgPoster.superview;
+    
+    // Setup view controller
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+                                           initWithImageInfo:imageInfo
+                                           mode:JTSImageViewControllerMode_Image
+                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    
+    
+    // Present the view controller.
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -185,8 +229,8 @@
                                                             {
                                                                 // Success Parsing JSON
                                                                 // Log NSDictionary response:
-                                                                NSLog(@"%@",jsonResponse);
-                                                                NSLog(@"runtime %@", [jsonResponse objectForKey:@"runtime"]);
+                                                                //NSLog(@"%@",jsonResponse);
+                                                                //NSLog(@"runtime %@", [jsonResponse objectForKey:@"runtime"]);
                                                                 if ([jsonResponse objectForKey:@"runtime"] && [[jsonResponse objectForKey:@"runtime"] intValue] > 0)
                                                                 {
                                                                     dispatch_async(dispatch_get_main_queue(), ^{

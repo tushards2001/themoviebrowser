@@ -19,11 +19,25 @@
 @synthesize lblMessage;
 @synthesize HUD;
 @synthesize lblSearchResultStats;
+@synthesize btnNext, btnPrevious;
+@synthesize viewPagination;
+@synthesize lblTotalResults;
+@synthesize btnSort;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // page counts
+    currentPage = 1;
+    totalPages = 0;
+    
+    // last search query
+    lastSearchedQuery = @"";
+    
+    // sort button
+    self.btnSort.enabled = NO;
     
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"Enter movie name..." attributes:@{ NSForegroundColorAttributeName : [UIColor lightGrayColor] }];
     self.tfSearchField.attributedPlaceholder = str;
@@ -36,8 +50,14 @@
     // search table view
     self.searchTableView.hidden = YES;
     
+    // pagination view
+    self.viewPagination.hidden = YES;
+    self.btnPrevious.hidden = YES;
+    self.btnNext.hidden = YES;
+    
     // search result stats label
     [self.lblSearchResultStats setText:@""];
+    [self.lblTotalResults setText:@""];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,8 +83,10 @@
 
 - (IBAction)actionSort:(UIButton *)sender
 {
+    [self.tfSearchField resignFirstResponder];
+    
     UIAlertController* alert = [UIAlertController
-                                alertControllerWithTitle:@"Sort By"      //  Must be "nil", otherwise a blank title area will appear above our two buttons
+                                alertControllerWithTitle:@"Sort By"
                                 message:nil
                                 preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -73,7 +95,7 @@
                               style:UIAlertActionStyleDestructive
                               handler:^(UIAlertAction * action)
                               {
-                                  //  UIAlertController will automatically dismiss the view
+                                  //dismissed
                               }];
     
     UIAlertAction* button1 = [UIAlertAction
@@ -99,19 +121,45 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (IBAction)actionPreviousPage:(UIButton *)sender
+{
+    if (currentPage > 1)
+    {
+        [self searchMovieByName:lastSearchedQuery pageNum:currentPage-1];
+    }
+}
+
+- (IBAction)actionNextPage:(UIButton *)sender
+{
+    if (currentPage < totalPages)
+    {
+        [self searchMovieByName:lastSearchedQuery pageNum:currentPage+1];
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.tfSearchField resignFirstResponder];
-    if (self.tfSearchField.text.length > 0)
+    
+    NSString *newSearchQuery = [self.tfSearchField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (newSearchQuery.length > 0 && ![newSearchQuery isEqualToString:lastSearchedQuery])
     {
-        [self searchMovieByName:[self.tfSearchField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+        lastSearchedQuery = newSearchQuery;
+        
+        // reset page count
+        currentPage = 1;
+        totalPages = 0;
+
+        [self searchMovieByName:newSearchQuery pageNum:currentPage];
     }
     return YES;
 }
 
-- (void)searchMovieByName:(NSString *)movieName
+- (void)searchMovieByName:(NSString *)movieName pageNum:(int)pageNum
 {
     NSLog(@"Searching Movie \"%@\".....", movieName);
+    
     
     //------------------ HUD - BEGIN -------------------
     if (HUD)
@@ -129,7 +177,8 @@
     // lblMessage hide
     self.lblMessage.hidden = YES;
     
-    if (arraySearch) {
+    if (arraySearch)
+    {
         [arraySearch removeAllObjects];
         arraySearch = nil;
     }
@@ -137,9 +186,10 @@
     NSString *api_key = TMDB_API_KEY;
     NSString *language = @"en-US";
     NSString *query = [movieName stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSString *page = [NSString stringWithFormat:@"%d", pageNum];
 
     
-    NSString *postURL = [NSString stringWithFormat:@"%@/search/movie?api_key=%@&language=%@&query=%@", DOMAIN_URL, api_key, language, query];
+    NSString *postURL = [NSString stringWithFormat:@"%@/search/movie?api_key=%@&language=%@&query=%@&page=%@", DOMAIN_URL, api_key, language, query, page];
     
     
     NSData *postData = [[NSData alloc] initWithData:[@"{}" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -162,12 +212,25 @@
                                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                             }
                                                             
-                                                            self.lblMessage.hidden = NO;
-                                                            [self.lblMessage setText:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+                                                            self.btnSort.enabled = NO;
                                                             
-                                                            self.searchTableView.hidden = YES;
+                                                            if (!self.searchTableView.hidden)
+                                                            {
+                                                                [self showUIAlertControllerWithTitle:@"Error" message:error.localizedDescription];
+                                                                
+                                                            }
+                                                            else
+                                                            {
+                                                                self.lblMessage.hidden = NO;
+                                                                [self.lblMessage setText:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+                                                                
+                                                                self.searchTableView.hidden = YES;
+                                                                self.viewPagination.hidden = YES;
+                                                                
+                                                                [self.lblSearchResultStats setText:@""];
+                                                                [self.lblTotalResults setText:@""];
+                                                            }
                                                             
-                                                            [self.lblSearchResultStats setText:@""];
                                                         });
                                                     }
                                                     else
@@ -189,13 +252,25 @@
                                                                         [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                     }
                                                                     
+                                                                    self.btnSort.enabled = NO;
+                                                                    
                                                                     // Error Parsing JSON
-                                                                    self.lblMessage.hidden = NO;
-                                                                    [self.lblMessage setText:@"Unknown error occured. Please try again."];
+                                                                    if (!self.searchTableView.hidden)
+                                                                    {
+                                                                        [self showUIAlertControllerWithTitle:@"Error" message:@"Unknown error occured. Please try again."];
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        self.lblMessage.hidden = NO;
+                                                                        [self.lblMessage setText:@"Unknown error occured. Please try again."];
+                                                                        
+                                                                        self.searchTableView.hidden = YES;
+                                                                        self.viewPagination.hidden = YES;
+                                                                        
+                                                                        [self.lblSearchResultStats setText:@""];
+                                                                        [self.lblTotalResults setText:@""];
+                                                                    }
                                                                     
-                                                                    self.searchTableView.hidden = YES;
-                                                                    
-                                                                    [self.lblSearchResultStats setText:@""];
                                                                 });
                                                             }
                                                             else
@@ -203,8 +278,11 @@
                                                                 // Success Parsing JSON
                                                                 // Log NSDictionary response:
                                                                 //NSLog(@"%@",jsonResponse);
-                                                                NSLog(@"Page %@", [jsonResponse objectForKey:@"page"]);
-                                                                NSLog(@"Total Pages %@", [jsonResponse objectForKey:@"total_pages"]);
+                                                                currentPage = [[jsonResponse objectForKey:@"page"] intValue];
+                                                                totalPages = [[jsonResponse objectForKey:@"total_pages"] intValue];
+                                                                
+                                                                NSLog(@"Current Page: %d", currentPage);
+                                                                NSLog(@"Total Pages: %d", totalPages);
                                                                 NSLog(@"Total Results %@", [jsonResponse objectForKey:@"total_results"]);
                                                                 NSArray *array = [jsonResponse objectForKey:@"results"];
                                                                 //NSLog(@"results[%lu]\n===========\n%@", (unsigned long)[array count], array);
@@ -217,10 +295,32 @@
                                                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                         }
                                                                         
+                                                                        self.btnSort.enabled = YES;
+                                                                        
                                                                         self.searchTableView.hidden = NO;
                                                                         [self.searchTableView reloadData];
                                                                         
-                                                                        [self.lblSearchResultStats setText:[NSString stringWithFormat:@"Showing %lu of %@", (unsigned long)arraySearch.count, [jsonResponse objectForKey:@"total_results"]]];
+                                                                        self.viewPagination.hidden = NO;
+                                                                        if (currentPage == totalPages)
+                                                                        {
+                                                                            self.btnNext.hidden = YES;
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            self.btnNext.hidden = NO;
+                                                                        }
+                                                                        
+                                                                        if (currentPage == 1)
+                                                                        {
+                                                                            self.btnPrevious.hidden = YES;
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            self.btnPrevious.hidden = NO;
+                                                                        }
+                                                                        
+                                                                        [self.lblSearchResultStats setText:[NSString stringWithFormat:@"Page %d of %d", currentPage, totalPages]];
+                                                                        [self.lblTotalResults setText:[NSString stringWithFormat:@"(%@ Results)", [jsonResponse objectForKey:@"total_results"]]];
                                                                     });
                                                                 }
                                                                 else
@@ -231,10 +331,14 @@
                                                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                         }
                                                                         
+                                                                        self.btnSort.enabled = NO;
+                                                                        
                                                                         self.searchTableView.hidden = YES;
+                                                                        self.viewPagination.hidden = YES;
                                                                         self.lblMessage.hidden = NO;
                                                                         [self.lblMessage setText:[NSString stringWithFormat:@"No movies found by the name \"%@\"", movieName]];
                                                                         [self.lblSearchResultStats setText:@""];
+                                                                        [self.lblTotalResults setText:@"0"];
                                                                     });
                                                                     
                                                                 }
@@ -250,16 +354,45 @@
                                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                 }
                                                                 
-                                                                //Web server is returning an error
-                                                                self.lblMessage.hidden = NO;
-                                                                [self.lblMessage setText:@"Unknown error occured. Please try again."];
+                                                                self.btnSort.enabled = NO;
                                                                 
-                                                                self.searchTableView.hidden = YES;
+                                                                //Web server is returning an error
+                                                                if (!self.searchTableView.hidden)
+                                                                {
+                                                                    [self showUIAlertControllerWithTitle:@"Error" message:@"Unknown error occured. Please try again."];
+                                                                }
+                                                                else
+                                                                {
+                                                                    self.lblMessage.hidden = NO;
+                                                                    [self.lblMessage setText:@"Unknown error occured. Please try again."];
+                                                                    
+                                                                    self.searchTableView.hidden = YES;
+                                                                    self.viewPagination.hidden = YES;
+                                                                }
                                                             });
                                                         }
                                                     }
                                                 }];
     [dataTask resume];
+}
+
+- (void)showUIAlertControllerWithTitle:(NSString *)title message:(NSString *)message
+{
+    UIAlertController * alert=[UIAlertController alertControllerWithTitle:title
+                                                                  message:message
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction * action)
+    {
+        // code
+    }];
+    
+    
+    [alert addAction:okButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -271,15 +404,39 @@
     }
 }
 
+
+
 #pragma mark - TableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tfSearchField resignFirstResponder];
+    
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     dictionary = [arraySearch objectAtIndex:indexPath.row];
     
     [self performSegueWithIdentifier:@"segue_movie_details" sender:dictionary];
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.tfSearchField resignFirstResponder];
+}
+
+/*- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat currentOffset = scrollView.contentOffset.y;
+    CGFloat maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+    
+    // Change 10.0 to adjust the distance from bottom
+    if (maximumOffset - currentOffset <= 10.0)
+    {
+        if (currentPage < totalPages)
+        {
+            [self searchMovieByName:[self.tfSearchField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] pageNum:currentPage+1];
+        }
+    }
+}*/
 
 #pragma mark - TableViewDataSource
 
@@ -295,7 +452,6 @@
     
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     dictionary = [arraySearch objectAtIndex:indexPath.row];
-    //cell.textLabel.text = [dictionary objectForKey:@"original_title"];
     
     // poster
     UIImageView *imageViewPosterThumbnail = (UIImageView *)[cell viewWithTag:1];
@@ -331,7 +487,7 @@
     [viewVoteCount.layer setMasksToBounds:YES];
     
     UILabel *lblVoteCount = (UILabel *)[cell viewWithTag:5];
-    [lblVoteCount setText:[NSString stringWithFormat:@"%@", [dictionary objectForKey:@"vote_average"]]];
+    [lblVoteCount setText:[NSString stringWithFormat:@"%.1f", [[dictionary objectForKey:@"vote_average"] floatValue]]];
     
     return cell;
 }

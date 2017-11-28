@@ -21,7 +21,21 @@
 #define DOMAIN_URL @"https://api.themoviedb.org/3"
 #define POSTER_URL_154 @"https://image.tmdb.org/t/p/w154"
 #define POSTER_URL_92 @"https://image.tmdb.org/t/p/w92"
+#define POSTER_URL_342 @"https://image.tmdb.org/t/p/w342"
+#define POSTER_URL_500 @"https://image.tmdb.org/t/p/w500"
 #define TMDB_API_KEY @"cd4831c9dda179e98c0c9b87fa54d511"
+
+#define NOW_PLAYING @"now_playing"
+#define TOP_RATED @"top_rated"
+#define POPULAR @"popular"
+#define UPCOMING @"upcoming"
+
+typedef NS_ENUM(NSInteger, MBMovieCategory) {
+    MBMovieCategoryNowPlaying = 0,
+    MBMovieCategoryTopRated = 1,
+    MBMovieCategoryPopular = 2,
+    MBMovieCategoryUpcoming = 3
+};
 
 @interface AppConfig : NSObject
 {
