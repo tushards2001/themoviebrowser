@@ -49,8 +49,7 @@
     }
     
     // poster
-    NSURL *posterURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", POSTER_URL, [self.dictionaryMovie objectForKey:@"poster_path"]]];
-    
+    NSURL *posterURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", POSTER_URL_154, [self.dictionaryMovie objectForKey:@"poster_path"]]];
     
     [self.imgPoster sd_setImageWithURL:posterURL
                       placeholderImage:[UIImage imageNamed:@"placeholder_poster"]
@@ -105,7 +104,7 @@
     //[self.lblRuntime setText:[NSString stringWithFormat:@"%@ Minutes", [self.dictionaryMovie objectForKey:@"runtime"]]];
     [self.lblRuntime setText:[NSString stringWithFormat:@"-NA-"]];
     
-    //[self getMovieDetails:(NSString *)[self.dictionaryMovie objectForKey:@"id"]];
+    
     
     // plot
     NSString *overview = [self.dictionaryMovie objectForKey:@"overview"];
@@ -123,6 +122,9 @@
     [scrollViewContainer setContentSize:self.container.frame.size];
     
     //self.container.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // get movie details
+    [self getMovieDetails:(NSString *)[self.dictionaryMovie objectForKey:@"id"]];
 }
 
 
@@ -150,26 +152,24 @@
 
 - (void)getMovieDetails:(NSString *)mId
 {
-    //NSString *postURL = [NSString stringWithFormat:@"%@/movie/%@?api_key=cd4831c9dda179e98c0c9b87fa54d511&language=en-US", DOMAIN_URL, mId];
-    NSString *postURL = @"https://api.themoviedb.org/3/movie/53182?api_key=cd4831c9dda179e98c0c9b87fa54d511&language=en-US";
+    NSString *postURL = [NSString stringWithFormat:@"%@/movie/%@?api_key=%@&language=en-US", DOMAIN_URL, mId, TMDB_API_KEY];
+    NSLog(@"postURL : %@", postURL);
+    //NSString *postURL = @"https://api.themoviedb.org/3/movie/53182?api_key=cd4831c9dda179e98c0c9b87fa54d511&language=en-US";
     
-    NSData *postData = [[NSData alloc] initWithData:[@"{}" dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *url = [NSURL URLWithString:postURL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:postURL]
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:10.0];
-    
-    [request setHTTPMethod:@"GET"];
-    [request setHTTPBody:postData];
     
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                    if (error) {
-                                                        NSLog(@"----- Error -----\n%@", error.localizedDescription);
-                                                    } else {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                    if (error)
+                                                    {
+                                                        NSLog(@"Error,%@", [error localizedDescription]);
+                                                    }
+                                                    else
+                                                    {
                                                         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                        //NSLog(@"%@", httpResponse);
                                                         NSLog(@"status code = %ld", (long)httpResponse.statusCode);
                                                         
                                                         if ([response isKindOfClass:[NSHTTPURLResponse class]])
@@ -179,31 +179,45 @@
                                                             
                                                             if (jsonError)
                                                             {
-                                                                // Error Parsing JSON
-                                                                
+                                                                NSLog(@"jsonError,%@", [jsonError localizedDescription]);
                                                             }
                                                             else
                                                             {
                                                                 // Success Parsing JSON
                                                                 // Log NSDictionary response:
                                                                 NSLog(@"%@",jsonResponse);
-                                                                /*NSLog(@"Page %@", [jsonResponse objectForKey:@"page"]);
-                                                                NSLog(@"Total Pages %@", [jsonResponse objectForKey:@"total_pages"]);
-                                                                NSLog(@"Total Results %@", [jsonResponse objectForKey:@"total_results"]);
-                                                                NSArray *array = [jsonResponse objectForKey:@"results"];
-                                                                //NSLog(@"results[%lu]\n===========\n%@", (unsigned long)[array count], array);
-                                                                arraySearch = [[NSMutableArray alloc] initWithArray:array];
-                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    [self.searchTableView reloadData];;
-                                                                });*/
+                                                                NSLog(@"runtime %@", [jsonResponse objectForKey:@"runtime"]);
+                                                                if ([jsonResponse objectForKey:@"runtime"] && [[jsonResponse objectForKey:@"runtime"] intValue] > 0)
+                                                                {
+                                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                                        [self.lblRuntime setText:[NSString stringWithFormat:@"%@ Minutes", [jsonResponse objectForKey:@"runtime"]]];
+                                                                    });
+                                                                }
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            //Web server is returning an error
+                                                            NSLog(@"Error");
                                                         }
                                                     }
                                                 }];
     [dataTask resume];
+    
+    //-------- option B - begin -------------
+    /*NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:postURL]];
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                    if (error) {
+                                                        NSLog(@"Error,%@", [error localizedDescription]);
+                                                    }
+                                                    else {
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+                                                    }
+                                                }];
+    [dataTask resume];*/
+    //-------- option B - end -------------
 }
 @end

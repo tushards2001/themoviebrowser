@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		523485AE1FCBF8BF00395F4D /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485AD1FCBF8BF00395F4D /* AppConfig.m */; };
-		523485B21FCBFD0200395F4D /* MBProgressHUD in Resources */ = {isa = PBXBuildFile; fileRef = 523485AF1FCBFD0200395F4D /* MBProgressHUD */; };
 		523485B41FCBFD0200395F4D /* SBJson in Resources */ = {isa = PBXBuildFile; fileRef = 523485B11FCBFD0200395F4D /* SBJson */; };
 		523485B91FCC37D900395F4D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485B81FCC37D900395F4D /* SearchViewController.m */; };
 		523485BF1FCC59F100395F4D /* MovieDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523485BE1FCC59F100395F4D /* MovieDetailsViewController.m */; };
@@ -41,9 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52204FD21FCD21DD00E43F75 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		523485AC1FCBF8BF00395F4D /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		523485AD1FCBF8BF00395F4D /* AppConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
-		523485AF1FCBFD0200395F4D /* MBProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MBProgressHUD; sourceTree = "<group>"; };
 		523485B11FCBFD0200395F4D /* SBJson */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SBJson; sourceTree = "<group>"; };
 		523485B61FCC01BE00395F4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		523485B71FCC37D900395F4D /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		523485B51FCC01BE00395F4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52204FD21FCD21DD00E43F75 /* CoreGraphics.framework */,
 				523485B61FCC01BE00395F4D /* Foundation.framework */,
 				A4A2985C1F7E44D1D224DF28 /* libPods-themoviebrowser.a */,
 			);
@@ -149,7 +149,6 @@
 				525369701FCBE4AA00EBD07F /* LaunchScreen.storyboard */,
 				525369741FCBE4AA00EBD07F /* main.m */,
 				5253696B1FCBE4AA00EBD07F /* Main.storyboard */,
-				523485AF1FCBFD0200395F4D /* MBProgressHUD */,
 				523485BD1FCC59F100395F4D /* MovieDetailsViewController.h */,
 				523485BE1FCC59F100395F4D /* MovieDetailsViewController.m */,
 				523485B11FCBFD0200395F4D /* SBJson */,
@@ -291,7 +290,6 @@
 				525369721FCBE4AA00EBD07F /* LaunchScreen.storyboard in Resources */,
 				523485B41FCBFD0200395F4D /* SBJson in Resources */,
 				5253696F1FCBE4AA00EBD07F /* Assets.xcassets in Resources */,
-				523485B21FCBFD0200395F4D /* MBProgressHUD in Resources */,
 				5253696D1FCBE4AA00EBD07F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,6 +25,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     //[self downloadConfiguration];
+    
+    
+    
 }
 
 
@@ -139,6 +142,27 @@
                                                     }
                                                 }];
     [dataTask resume];
+}
+
+- (void)getMovieDetailsWithId:(NSString *)movieId
+{
+    //---- try - begin ------
+    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/1271?language=en-US&api_key=cd4831c9dda179e98c0c9b87fa54d511"];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                    if (error) {
+                                                        NSLog(@"Error,%@", [error localizedDescription]);
+                                                    }
+                                                    else {
+                                                        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+                                                    }
+                                                }];
+    [dataTask resume];
+    //---- try - end --------
 }
 
 

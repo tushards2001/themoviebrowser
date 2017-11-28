@@ -19,7 +19,8 @@
 #import <Foundation/Foundation.h>
 
 #define DOMAIN_URL @"https://api.themoviedb.org/3"
-#define POSTER_URL @"https://image.tmdb.org/t/p/w154"
+#define POSTER_URL_154 @"https://image.tmdb.org/t/p/w154"
+#define POSTER_URL_92 @"https://image.tmdb.org/t/p/w92"
 #define TMDB_API_KEY @"cd4831c9dda179e98c0c9b87fa54d511"
 
 @interface AppConfig : NSObject
